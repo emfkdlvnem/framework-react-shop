@@ -4,7 +4,7 @@ function Header() {
     return (
         <header>
                 <h1>
-                    <Link to="/">물빠진 청바지 헤더</Link>
+                    <Link to="/">React Shop</Link>
                 </h1>
                 <nav>
                     <ul className="flex">

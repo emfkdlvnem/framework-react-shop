@@ -1,46 +1,46 @@
 import { Routes, Route } from 'react-router-dom'
-import MainPage from './views/MainPage'
+
+import { useState, useEffect } from 'react'
+import Header from './component/Header'
+import Footer from './component/Footer'
+
+import MainPage from './views/MainPage' 
 import CartPage from './views/CartPage'
 import ProductPage from './views/ProductPage'
 
-import Header from './component/Header'
 import FasionPage from './views/FasionPage'
 import AccessoryPage from './views/AccessoryPage'
 import DigitalPage from './views/DigitalPage'
-import { useState } from 'react'
-import { useEffect } from 'react'
+
 
 function App() {
-  const [productList, setProductList] = useState ([]);
-  
-  async function getProductData() {
-    const result = await fetch('https://fakestoreapi.com/products')
-    const json = await result.json()
+	const [products, setProducts] = useState([]);
 
-    setProductList(json)
+	useEffect(() => {
+		async function getProductData() {
+			const response = await fetch('https://fakestoreapi.com/products');
+			const data = await response.json();
+			setProducts(data);
+		}
+	
+		getProductData();
+	}, []);
 
-    console.log(json)
-  }
-  useEffect(() => {
-      getProductData()
-  }, [])
-
-  return (
-    <>
-      {/* <div>{productList}</div> */}
-      <Header/>
-      <Routes>
-        {/* 페이지 이동시 해당 컴포넌트 페이지로 보여질 수 있는 */}
-        <Route path="/" element={<MainPage/>} />
-        <Route path="/cart" element={<CartPage/>} />
-        <Route path="/fasion" element={<FasionPage/>} />
-        <Route path="/accessory" element={<AccessoryPage/>} />
-        <Route path="/digital" element={<DigitalPage/>} />
-        <Route path="/product/:productId" element={<ProductPage/>} />
-      </Routes>
-      <div>footer영역 항상 고정인 애들</div>
-    </>
-  )
+	return (
+		<>	
+			<Header/>
+			{/* 페이지 이동시 해당 컴포넌트 페이지로 보여질 수 있는 */}
+            <Routes>
+                <Route path="/" element={<MainPage products={products} />} />
+                <Route path="/cart" element={<CartPage products={products} />} />
+                <Route path="/fasion" element={<FasionPage products={products} />} />
+                <Route path="/accessory" element={<AccessoryPage products={products} />} />
+                <Route path="/digital" element={<DigitalPage products={products} />} />
+                <Route path="/product/:productId" element={<ProductPage products={products} />} />
+            </Routes>
+			<Footer />
+		</>
+	)
 }
 
 export default App
