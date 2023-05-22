@@ -1,6 +1,6 @@
 function CartPage() {
     return (
-        <div>main page.</div>
+        <div>cart page.</div>
     )
 }
 

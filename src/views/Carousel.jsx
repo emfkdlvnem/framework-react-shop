@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './Carousel.css';
 
 import img_shop1 from '../assets/img_shop_fashion.jpeg';
@@ -39,7 +41,7 @@ const VisualCarousel = () => {
     }, [slides]);
 
     useEffect(() => {
-        const intervalId = setInterval(goToNextSlide, 3000);
+        const intervalId = setInterval(goToNextSlide, 5000);
     
         return () => {
             clearInterval(intervalId);
@@ -47,11 +49,11 @@ const VisualCarousel = () => {
     }, [goToNextSlide]);
 
     return (
-        <div className="carousel flex items-center w-full overflow-x-hidden">
-            <button className="carousel__button carousel__button--prev" onClick={goToPreviousSlide}>
-                &lt;
-            </button>
-            <div className="carousel__slide flex">
+        <div className="carousel">
+            <div className="carousel__slide">
+                <button className="carousel__button carousel__button--prev" onClick={goToPreviousSlide}>
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                </button>
                 {slides.map((slide, index) => (
                     <div
                         key={index}
@@ -65,10 +67,10 @@ const VisualCarousel = () => {
                         </div>
                     </div>
                 ))}
+                <button className="carousel__button carousel__button--next" onClick={goToNextSlide}>
+                    <FontAwesomeIcon icon={faChevronRight} />
+                </button>
             </div>
-            <button className="carousel__button carousel__button--next" onClick={goToNextSlide}>
-                &gt;
-            </button>
         </div>
     );
 };

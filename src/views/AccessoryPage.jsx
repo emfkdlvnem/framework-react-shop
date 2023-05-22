@@ -1,7 +1,7 @@
-function DigitalPage() {
+function AccessoryPage() {
     return (
-        <div>DigitalPage</div>
+        <div>AccessoryPage</div>
     )
 }
 
-export default DigitalPage
+export default AccessoryPage
