@@ -92,7 +92,7 @@ function Header({ toggleTheme }) {
                                     />
                                 </button>
                             </Link>
-                            <span className="absolute top-5 right-9 px-3 py-1 rounded-full bg-red-500 text-xs font-bold leading-none text-gray-200 transform translate-x-1/2 -translate-y-1/2">
+                            <span className="absolute top-5 right-8 px-2.5 py-1 rounded-full bg-red-500 text-xs font-bold leading-none text-gray-200 transform translate-x-1/2 -translate-y-1/2">
                                 {cartCount}
                             </span>
                         </div>

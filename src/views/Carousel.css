@@ -67,7 +67,7 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
-    padding-left: 100px;
+    margin-left: 100px;
     z-index: 2;
 }
 .carousel__content h2 {

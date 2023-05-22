@@ -15,12 +15,10 @@ header .header-left {
     display: flex;
     align-items: center;
 }
-
 header h1 {
     font-size: 16px;
     font-weight: 700;
 }
-
 header nav ul {
     display: flex;
     margin-left: 20px;
@@ -40,7 +38,6 @@ header nav ul li .nav-link:hover {
     color: #000;
     background-color: #66686b82;
 }
-
 .dark-mode .nav-link:hover {
     color: #fff;
     background-color: #353A42;
