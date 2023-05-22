@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import './Carousel.css';
 
 import img_shop1 from '../assets/img_shop_fashion.jpeg';
 import img_shop2 from '../assets/img_shop_digital.jpeg';
 import img_shop3 from '../assets/img_shop_grocery.jpeg';
 
 const VisualCarousel = () => {
-    const slides = [
+    const slides = useMemo(() => [
         {
             image: img_shop1,
             title: '물빠진 청바지',
@@ -25,7 +26,7 @@ const VisualCarousel = () => {
             description: '농장 직배송으로 더욱 신선한 식료품을 만나보세요.',
             link: '/grocery',
         },
-    ];
+    ], []);
 
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -33,9 +34,9 @@ const VisualCarousel = () => {
         setCurrentSlide((prevSlide) => (prevSlide === 0 ? slides.length - 1 : prevSlide - 1));
     };
 
-    const goToNextSlide = () => {
+    const goToNextSlide = useCallback(() => {
         setCurrentSlide((prevSlide) => (prevSlide === slides.length - 1 ? 0 : prevSlide + 1));
-    };
+    }, [slides]);
 
     useEffect(() => {
         const intervalId = setInterval(goToNextSlide, 3000);
@@ -43,26 +44,26 @@ const VisualCarousel = () => {
         return () => {
             clearInterval(intervalId);
         };
-    }, []);
+    }, [goToNextSlide]);
 
     return (
-        <div className="carousel flex items-center">
+        <div className="carousel flex items-center w-full overflow-x-hidden">
             <button className="carousel__button carousel__button--prev" onClick={goToPreviousSlide}>
                 &lt;
             </button>
             <div className="carousel__slide flex">
                 {slides.map((slide, index) => (
-                <div
-                    key={index}
-                    className={`carousel__image ${index === currentSlide ? 'active' : ''}`}
-                >
-                    <img src={slide.image} alt={slide.title} />
-                    <div className="carousel__content">
-                    <h2>{slide.title}</h2>
-                    <p>{slide.description}</p>
-                    <Link to={slide.link}>바로가기</Link>
+                    <div
+                        key={index}
+                        className={`carousel__image ${index === currentSlide ? 'active' : ''}`}
+                    >
+                        <img src={slide.image} alt={slide.title}/>
+                        <div className="carousel__content">
+                            <h2>{slide.title}</h2>
+                            <p>{slide.description}</p>
+                            <Link to={slide.link}>바로가기</Link>
+                        </div>
                     </div>
-                </div>
                 ))}
             </div>
             <button className="carousel__button carousel__button--next" onClick={goToNextSlide}>
