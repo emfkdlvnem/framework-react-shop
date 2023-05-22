@@ -1,6 +1,6 @@
+import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 
-import { useState, useEffect } from 'react'
 import Header from './component/Header'
 import Footer from './component/Footer'
 
@@ -15,6 +15,7 @@ import DigitalPage from './views/DigitalPage'
 
 function App() {
 	const [products, setProducts] = useState([]);
+	const [isDarkMode, setIsDarkMode] = useState(false);
 
 	useEffect(() => {
 		async function getProductData() {
@@ -26,9 +27,12 @@ function App() {
 		getProductData();
 	}, []);
 
+	const toggleTheme = () => {
+		setIsDarkMode(prevMode => !prevMode);
+	};
 	return (
-		<>	
-			<Header/>
+		<div className={`app ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>	
+			<Header isDarkMode={isDarkMode} toggleTheme={toggleTheme}/>
 			{/* 페이지 이동시 해당 컴포넌트 페이지로 보여질 수 있는 */}
             <Routes>
                 <Route path="/" element={<MainPage products={products} />} />
@@ -39,7 +43,7 @@ function App() {
                 <Route path="/product/:productId" element={<ProductPage products={products} />} />
             </Routes>
 			<Footer />
-		</>
+		</div>
 	)
 }
 

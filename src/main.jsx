@@ -10,5 +10,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <App />
     </BrowserRouter>
   </React.StrictMode>,
-  // 리액트 설정 페이지 
 )
