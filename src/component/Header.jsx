@@ -35,7 +35,7 @@ function Header({ toggleTheme }) {
     }, [isDarkMode]);
 
     return (
-        <header className={`${isDarkMode ? 'bg-header-dark-mode text-white' : 'bg-white'}`}>
+        <header className={`${isDarkMode ? 'bg-header-dark-mode text-white' : 'bg-white text-black shadow-lg'}`}>
             <div className="header-left">
                 <h1>
                     <Link to="/">React Shop</Link>
@@ -43,17 +43,17 @@ function Header({ toggleTheme }) {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/fashion" className={`nav-link ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+                            <Link to="/fashion" className="nav-link">
                                 패션
                             </Link>
                         </li>
                         <li>
-                            <Link to="/accessory" className={`nav-link ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+                            <Link to="/accessory" className="nav-link">
                                 액세서리
                             </Link>
                         </li>
                         <li>
-                            <Link to="/digital" className={`nav-link ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+                            <Link to="/digital" className="nav-link">
                                 디지털
                             </Link>
                         </li>

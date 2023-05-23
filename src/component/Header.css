@@ -35,7 +35,7 @@ header nav ul li .nav-link:hover {
     background-color: #191d247e;
 }
 .light-mode .nav-link:hover {
-    color: #000;
+    color: #fff;
     background-color: #66686b82;
 }
 .dark-mode .nav-link:hover {
