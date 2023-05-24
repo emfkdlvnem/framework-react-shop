@@ -1,9 +1,15 @@
 /* FashionPage.jsx */
+/* AccessoryPage.jsx */
+/* DigitalPage.jsx */
+
 .item {
     max-width: 1280px;
     margin: 0 auto;
     padding: 2rem;
     text-align: center;
+}
+.item .card {
+  height: 500px;
 }
 .item figure img {
   max-width: 50%;
@@ -13,33 +19,3 @@
 .item figure img:hover {
   transform: scale(1.5);
 }
-
-/* DigitalPage.jsx */
-.digital.item {
-
-}
-
-
-
-
-/* AccessoryPage.jsx */
-.accessory.item {
-
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  
-  .grid-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .grid-item img {
-    width: 100%;
-    height: auto;
-  }

@@ -13,65 +13,65 @@ import DigitalPage from './views/DigitalPage';
 import './App.css';
 
 function App() {
-  const [products, setProducts] = useState([]);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const isDarkModeStored = localStorage.getItem('isDarkMode');
-    return isDarkModeStored === null ? true : JSON.parse(isDarkModeStored);
-  });
-  const [cartCount, setCartCount] = useState(() => {
-    const savedCartCount = localStorage.getItem('cartCount');
-    return savedCartCount === null ? 0 : Number(savedCartCount);
-  });
+	const [products, setProducts] = useState([]);
+	const [isDarkMode, setIsDarkMode] = useState(() => {
+		const isDarkModeStored = localStorage.getItem('isDarkMode');
+		return isDarkModeStored === null ? true : JSON.parse(isDarkModeStored);
+	});
+	const [cartCount, setCartCount] = useState(() => {
+		const savedCartCount = localStorage.getItem('cartCount');
+		return savedCartCount === null ? 0 : Number(savedCartCount);
+	});
 
-  useEffect(() => {
-    async function getProductData() {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    }
+	useEffect(() => {
+		async function getProductData() {
+		try {
+			const response = await fetch('https://fakestoreapi.com/products');
+			const data = await response.json();
+			setProducts(data);
+		} catch (error) {
+			console.error('Error fetching products:', error);
+		}
+		}
 
-    getProductData();
-  }, []);
+		getProductData();
+	}, []);
 
-  useEffect(() => {
-    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
+	useEffect(() => {
+		localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
+	}, [isDarkMode]);
 
-  useEffect(() => {
-    localStorage.setItem('cartCount', cartCount.toString());
-  }, [cartCount]);
+	useEffect(() => {
+		localStorage.setItem('cartCount', cartCount.toString());
+	}, [cartCount]);
 
-  const toggleTheme = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
-  // useEffect(() => {
-  //   // 초기화 로직 추가
-  //   localStorage.removeItem('cartCount');
-  //   setCartCount(0);
-  // }, []);
-  return (
-    <div className={`app ${isDarkMode ? 'dark-mode bg-body-dark-mode' : 'light-mode text-black bg-white'}`}>
-      <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} cartCount={cartCount} />
-      <div className="headerUnder">
-        <Routes>
-          <Route path="/" element={<MainPage products={products} />} />
-          <Route path="/cart" element={<CartPage products={products} />} />
-          <Route path="/fashion" element={<FashionPage products={products} />} />
-          <Route path="/accessory" element={<AccessoryPage products={products} />} />
-          <Route path="/digital" element={<DigitalPage products={products} />} />
-          <Route
-            path="/product/:productId"
-            element={<ProductPage setCartCount={setCartCount} />}
-          />
-        </Routes>
-      </div>
-      <Footer />
-    </div>
-  );
+	const toggleTheme = () => {
+		setIsDarkMode((prevMode) => !prevMode);
+	};
+	// useEffect(() => {
+	//   // 초기화 로직 추가
+	//   localStorage.removeItem('cartCount');
+	//   setCartCount(0);
+	// }, []);
+	return (
+		<div className={`app ${isDarkMode ? 'dark-mode bg-body-dark-mode' : 'light-mode text-black bg-white'}`}>
+		<Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} cartCount={cartCount} />
+		<div className="headerUnder">
+			<Routes>
+			<Route path="/" element={<MainPage products={products} />} />
+			<Route path="/cart" element={<CartPage products={products} />} />
+			<Route path="/fashion" element={<FashionPage products={products} />} />
+			<Route path="/accessory" element={<AccessoryPage products={products} />} />
+			<Route path="/digital" element={<DigitalPage products={products} />} />
+			<Route
+				path="/product/:productId"
+				element={<ProductPage setCartCount={setCartCount} />}
+			/>
+			</Routes>
+		</div>
+		<Footer isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+		</div>
+	);
 }
 
 export default App;
