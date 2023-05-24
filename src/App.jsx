@@ -10,6 +10,7 @@ import ProductPage from './views/ProductPage';
 import FashionPage from './views/FashionPage';
 import AccessoryPage from './views/AccessoryPage';
 import DigitalPage from './views/DigitalPage';
+import './App.css';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -55,7 +56,7 @@ function App() {
   return (
     <div className={`app ${isDarkMode ? 'dark-mode bg-body-dark-mode' : 'light-mode text-black bg-white'}`}>
       <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} cartCount={cartCount} />
-      <div className="pt-14">
+      <div className="headerUnder">
         <Routes>
           <Route path="/" element={<MainPage products={products} />} />
           <Route path="/cart" element={<CartPage products={products} />} />

@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import './Carousel.css';
 
+
 import img_shop1 from '../assets/img_shop_fashion.jpeg';
 import img_shop2 from '../assets/img_shop_digital.jpeg';
 import img_shop3 from '../assets/img_shop_grocery.jpeg';
