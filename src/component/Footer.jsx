@@ -12,7 +12,7 @@ import {
     faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 
-function Footer({ isDarkMode, toggleTheme }) {
+function Footer({ isDarkMode }) {
     const cardList = ['visa', 'mastercard', 'amex', 'paypal', 'diners-club', 'discover'];
     const socialMediaList = [
         { icon: faFacebookF, link: 'https://www.facebook.com/' },
@@ -24,7 +24,7 @@ function Footer({ isDarkMode, toggleTheme }) {
     const thisYear = date.getFullYear();
 
     return (
-        <footer className={`border-t py-8 ${isDarkMode ? 'bg-header-dark-mode text-white' : 'bg-white text-black shadow-lg'}`}>
+        <footer className={` py-8 ${isDarkMode ? 'bg-header-dark-mode text-white' : 'bg-white text-black shadow-lg'}`}>
         <div className="container mx-auto">
             <div className="text-center">
                 <a href="https://zero-base.co.kr/" target="_blank" rel="noopener noreferrer" className="text-gray-500">
@@ -66,7 +66,7 @@ function Footer({ isDarkMode, toggleTheme }) {
                 </a>
             ))}
             </div>
-            <div className="text-center">© {thisYear} ZB</div>
+            <div className="text-center">Copyright © {thisYear} ZB</div>
         </div>
         </footer>
     );

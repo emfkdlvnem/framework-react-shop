@@ -48,11 +48,6 @@ function App() {
 	const toggleTheme = () => {
 		setIsDarkMode((prevMode) => !prevMode);
 	};
-	// useEffect(() => {
-	//   // 초기화 로직 추가
-	//   localStorage.removeItem('cartCount');
-	//   setCartCount(0);
-	// }, []);
 	return (
 		<div className={`app ${isDarkMode ? 'dark-mode bg-body-dark-mode' : 'light-mode text-black bg-white'}`}>
 		<Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} cartCount={cartCount} />
@@ -60,9 +55,9 @@ function App() {
 			<Routes>
 			<Route path="/" element={<MainPage products={products} />} />
 			<Route path="/cart" element={<CartPage products={products} />} />
-			<Route path="/fashion" element={<FashionPage products={products} />} />
-			<Route path="/accessory" element={<AccessoryPage products={products} />} />
-			<Route path="/digital" element={<DigitalPage products={products} />} />
+			<Route path="/fashion" element={<FashionPage products={products} isDarkMode={isDarkMode} />} />
+			<Route path="/accessory" element={<AccessoryPage products={products} isDarkMode={isDarkMode} />} />
+			<Route path="/digital" element={<DigitalPage products={products} isDarkMode={isDarkMode} />} />
 			<Route
 				path="/product/:productId"
 				element={<ProductPage setCartCount={setCartCount} isDarkMode={isDarkMode}  />}
