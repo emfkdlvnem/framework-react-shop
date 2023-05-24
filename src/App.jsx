@@ -17,7 +17,7 @@ function App() {
         const isDarkModeStored = localStorage.getItem('isDarkMode');
         return isDarkModeStored === null ? true : JSON.parse(isDarkModeStored);
     });
-
+    const [cartCount, setCartCount] = useState(0);
     useEffect(() => {
         async function getProductData() {
             try {
@@ -38,7 +38,7 @@ function App() {
 
     return (
         <div className={`app ${isDarkMode ? 'dark-mode bg-body-dark-mode' : 'light-mode text-black bg-white'}`}>
-            <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
+            <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} cartCount={cartCount}/>
             <div className="pt-14">
                 <Routes>
                     <Route path="/" element={<MainPage products={products} />} />
@@ -46,7 +46,7 @@ function App() {
                     <Route path="/fashion" element={<FashionPage products={products} />} />
                     <Route path="/accessory" element={<AccessoryPage products={products} />} />
                     <Route path="/digital" element={<DigitalPage products={products} />} />
-                    <Route path="/product/:productId" element={<ProductPage products={products} />} />
+                    <Route path="/product/:productId" element={<ProductPage products={products} setCartCount={setCartCount} />} />
                 </Routes>
             </div>
             <Footer />

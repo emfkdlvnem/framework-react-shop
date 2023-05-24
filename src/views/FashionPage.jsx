@@ -1,24 +1,41 @@
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-function FashionPage({ products }) {
-  const fashionProducts = products.filter((product) => product.category === 'fashion');
+function FashionPage() {
+	const [fashionProducts, setFashionProducts] = useState([]);
 
-  return (
-    <div>
-      <h2>Fashion Products</h2>
-      {fashionProducts.map((product) => (
-        <div key={product.id}>
-          <h3>{product.title}</h3>
-          <p>{product.description}</p>
-          <img src={product.image} alt={product.title} />
-        </div>
-      ))}
-    </div>
-  );
+	useEffect(() => {
+		async function fetchFashionProducts() {
+		try {
+			const responseMen = await fetch('https://fakestoreapi.com/products/category/men\'s%20clothing');
+			const responseWomen = await fetch('https://fakestoreapi.com/products/category/women\'s%20clothing');
+			
+			const dataMen = await responseMen.json();
+			const dataWomen = await responseWomen.json();
+
+			const mergedData = [...dataMen, ...dataWomen];
+			setFashionProducts(mergedData);
+		} catch (error) {
+			console.error('Error fetching fashion products:', error);
+		}
+		}
+
+		fetchFashionProducts();
+	}, []);
+
+	return (
+		<div>
+		<h2>Fashion Products</h2>
+		{fashionProducts.map((product) => (
+			<div key={product.id}>
+			<Link to={`/product/${product.id}`}>
+				<h3>{product.title}</h3>
+				<img src={product.image} alt={product.title} />
+			</Link>
+			</div>
+		))}
+		</div>
+	);
 }
-
-FashionPage.propTypes = {
-  products: PropTypes.array.isRequired,
-};
 
 export default FashionPage;
