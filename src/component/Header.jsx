@@ -1,18 +1,18 @@
+// Header.jsx
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon, faShoppingBasket  } from '@fortawesome/free-solid-svg-icons';
+import { faSun, faMoon, faShoppingBasket } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
 
-function Header({ toggleTheme }) {
+function Header({ toggleTheme, cartCount }) {
     const [isRotating, setIsRotating] = useState(false);
     const isDarkModeStored = localStorage.getItem('isDarkMode');
     const [isDarkMode, setIsDarkMode] = useState(
         isDarkModeStored === null ? true : JSON.parse(isDarkModeStored)
     );
     const [currentIcon, setCurrentIcon] = useState(isDarkMode ? faMoon : faSun);
-    const [cartCount, setCartCount] = useState(0);
 
     useEffect(() => {
         setCurrentIcon(isDarkMode ? faMoon : faSun);
@@ -75,11 +75,14 @@ function Header({ toggleTheme }) {
                                 className={`text-xl ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
                             />
                         </button>
-
                     </li>
                     <li>
                         <div>
-                            <input type="text" placeholder="검색" className={`${isDarkMode ? 'bg-gray-600' : 'bg-gray-300'} h-10 rounded-md px-2`} />
+                            <input
+                                type="text"
+                                placeholder="검색"
+                                className={`${isDarkMode ? 'bg-gray-600' : 'bg-gray-300'} h-10 rounded-md px-2`}
+                            />
                         </div>
                     </li>
                     <li>
@@ -87,7 +90,7 @@ function Header({ toggleTheme }) {
                             <Link to="/cart">
                                 <button>
                                     <FontAwesomeIcon
-                                        icon={faShoppingBasket }
+                                        icon={faShoppingBasket}
                                         className={`text-xl ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
                                     />
                                 </button>
@@ -105,6 +108,7 @@ function Header({ toggleTheme }) {
 
 Header.propTypes = {
     toggleTheme: PropTypes.func.isRequired,
+    cartCount: PropTypes.number.isRequired,
 };
 
 export default Header;

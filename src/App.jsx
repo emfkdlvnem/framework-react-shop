@@ -12,46 +12,61 @@ import AccessoryPage from './views/AccessoryPage';
 import DigitalPage from './views/DigitalPage';
 
 function App() {
-    const [products, setProducts] = useState([]);
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        const isDarkModeStored = localStorage.getItem('isDarkMode');
-        return isDarkModeStored === null ? true : JSON.parse(isDarkModeStored);
-    });
-    const [cartCount, setCartCount] = useState(0);
-    useEffect(() => {
-        async function getProductData() {
-            try {
-                const response = await fetch('https://fakestoreapi.com/products');
-                const data = await response.json();
-                setProducts(data);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        }
+  const [products, setProducts] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const isDarkModeStored = localStorage.getItem('isDarkMode');
+    return isDarkModeStored === null ? true : JSON.parse(isDarkModeStored);
+  });
+  const [cartCount, setCartCount] = useState(() => {
+    const savedCartCount = localStorage.getItem('cartCount');
+    return savedCartCount === null ? 0 : Number(savedCartCount);
+  });
 
-        getProductData();
-    }, []);
+  useEffect(() => {
+    async function getProductData() {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products');
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    }
 
-    const toggleTheme = () => {
-        setIsDarkMode((prevMode) => !prevMode);
-    };
+    getProductData();
+  }, []);
 
-    return (
-        <div className={`app ${isDarkMode ? 'dark-mode bg-body-dark-mode' : 'light-mode text-black bg-white'}`}>
-            <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} cartCount={cartCount}/>
-            <div className="pt-14">
-                <Routes>
-                    <Route path="/" element={<MainPage products={products} />} />
-                    <Route path="/cart" element={<CartPage products={products} />} />
-                    <Route path="/fashion" element={<FashionPage products={products} />} />
-                    <Route path="/accessory" element={<AccessoryPage products={products} />} />
-                    <Route path="/digital" element={<DigitalPage products={products} />} />
-                    <Route path="/product/:productId" element={<ProductPage products={products} setCartCount={setCartCount} />} />
-                </Routes>
-            </div>
-            <Footer />
-        </div>
-    );
+  useEffect(() => {
+    localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
+
+  useEffect(() => {
+    localStorage.setItem('cartCount', cartCount.toString());
+  }, [cartCount]);
+
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
+  return (
+    <div className={`app ${isDarkMode ? 'dark-mode bg-body-dark-mode' : 'light-mode text-black bg-white'}`}>
+      <Header isDarkMode={isDarkMode} toggleTheme={toggleTheme} cartCount={cartCount} />
+      <div className="pt-14">
+        <Routes>
+          <Route path="/" element={<MainPage products={products} />} />
+          <Route path="/cart" element={<CartPage products={products} />} />
+          <Route path="/fashion" element={<FashionPage products={products} />} />
+          <Route path="/accessory" element={<AccessoryPage products={products} />} />
+          <Route path="/digital" element={<DigitalPage products={products} />} />
+          <Route
+            path="/product/:productId"
+            element={<ProductPage setCartCount={setCartCount} />}
+          />
+        </Routes>
+      </div>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;
