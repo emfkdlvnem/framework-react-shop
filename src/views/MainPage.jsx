@@ -3,9 +3,8 @@ import VisualCarousel from './Carousel';
 const MainPage = () => {
     return (
         <>
-            <VisualCarousel />
+        <VisualCarousel />
         </>
     );
 };
-
 export default MainPage;
