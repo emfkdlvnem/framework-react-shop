@@ -65,7 +65,7 @@ function App() {
 			<Route path="/digital" element={<DigitalPage products={products} />} />
 			<Route
 				path="/product/:productId"
-				element={<ProductPage setCartCount={setCartCount} />}
+				element={<ProductPage setCartCount={setCartCount} isDarkMode={isDarkMode}  />}
 			/>
 			</Routes>
 		</div>

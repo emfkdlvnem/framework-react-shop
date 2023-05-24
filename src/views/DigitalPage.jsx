@@ -26,7 +26,7 @@ function DigitalPage() {
 				{digitalProducts.map((product) => (
 					<div key={product.id} className='drop-shadow-xl block rounded-md border border-slate-100 bg-white m-2'>
 						<Link to={`/product/${product.id}`}>
-							<figure className='flex h-80 bg-white overflow-hidden'>
+							<figure className='allItem flex h-80 bg-white overflow-hidden'>
 								<img src={product.image} alt={product.title}/>
 							</figure>
 							<div className='h-48 bg-gray-100 p-4 card-body'>

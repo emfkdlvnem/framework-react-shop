@@ -4,12 +4,22 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 50;
+    /* z-index: 50;
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 56px;
+    padding: 7px 20px; */
+}
+.headerTop {
+    max-width: 1280px;
+    height: 56px;
+    margin: 0 auto;
     padding: 7px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
 }
 header .header-left {
     display: flex;
@@ -48,6 +58,10 @@ header .header-right ul {
     margin-right: 10px;
 }
 header .header-right ul li {
+    margin: 0 8px;
+}
+header .header-right ul li:nth-child(3) {
+    position: relative;
     margin: 0 8px;
 }
 input:focus {
